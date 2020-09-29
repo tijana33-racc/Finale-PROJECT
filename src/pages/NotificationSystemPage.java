@@ -11,17 +11,21 @@ public class NotificationSystemPage extends BasicPage {
 
 	public NotificationSystemPage(WebDriver driver, WebDriverWait wait) {
 		super(driver, wait);
-		
+
 	}
-public WebElement getMsg() { 
-	return this.driver.findElement(By.className("system_message alert alert--success")); 
-}
-public String AlertMsg() { 
-	return this.getMsg().getText(); 
-}
-public void MessageDissapear() {
-	WebElement element = this.driver.findElement(By.xpath(" //*[contains(@class, 'system_message')]")); 
-	wait.until(ExpectedConditions.attributeToBe(element, "style", "\"display: none;\"")); 
-}
+
+	public WebElement getMsg() {
+		return this.driver.findElement(By.xpath(
+				"//*[contains(@class, 'alert--success') or contains(@class, 'alert--danger')][contains(@style,'display: block')]"));
+	}
+
+	public String AlertMsg() {
+		return this.getMsg().getText();
+	}
+
+	public void MessageDissapear() {
+		WebElement element = this.driver.findElement(By.xpath(" //*[contains(@class, 'system_message')]"));
+		wait.until(ExpectedConditions.attributeToBe(element, "style", "\"display: none;\""));
+	}
 
 }
