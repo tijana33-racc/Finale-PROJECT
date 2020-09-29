@@ -76,7 +76,7 @@ public class ProfilePage extends BasicPage {
 	}
 	public WebElement getUploadPhoto() {
 		JavascriptExecutor js= (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].click()", this.getUploadPhoto()); 
+		js.executeScript("arguments[0].click();", this.getUploadPhoto()); 
 
 		return this.driver.findElement(By.className("ion-camera")); 
 		
