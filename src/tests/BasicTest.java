@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 public abstract class BasicTest {
 	protected WebDriver driver;
 	protected WebDriverWait wait;
-	protected String baseUrl;
+	protected String baseUrl= "http://demo.yo-meals.com";
 	protected String email= "customer@dummyid.com";
 	protected String password="12345678a";
 
