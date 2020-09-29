@@ -10,11 +10,13 @@ public class ChartSummeryPage extends BasicPage {
 	public ChartSummeryPage(WebDriver driver, WebDriverWait wait) {
 		super(driver, wait);
 	}
-public WebElement clearAllBtn() {
-	return this.driver.findElement(By.xpath("//*[@id=\"cartSummary\"]/div/div[1]/a[2]"));
-}
-public void cleatAll() {
-	this.clearAllBtn().click();
-}
+
+	public WebElement clearAllBtn() {
+		return this.driver.findElement(By.xpath("//*[@id=\"cartSummary\"]/div/div[1]/a[2]"));
+	}
+
+	public void cleatAll() {
+		this.clearAllBtn().click();
+	}
 
 }
