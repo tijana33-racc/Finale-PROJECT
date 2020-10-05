@@ -22,4 +22,5 @@ public WebElement getLogout() {
 public void logOut() { 
 	this.getLogout().click();
 }
+
 }

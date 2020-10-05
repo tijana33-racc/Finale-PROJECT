@@ -14,9 +14,7 @@ public class MealPage extends BasicPage {
 		super(driver, wait);
 	}
 
-	public WebElement getMealbtn() {
-		return this.driver.findElement(By.xpath("//*[@id=\"header\"]/div[2]/div/div[2]/div[1]/div/ul/li[1]"));
-	}
+	
 
 	public WebElement getSearcMeal() {
 		return this.driver.findElement(By.className("js-search-keywords"));
@@ -28,9 +26,7 @@ public class MealPage extends BasicPage {
 		js.executeScript("arguments[0].click()", src);
 	}
 
-	public List<WebElement> foodImg() {
-		return this.driver.findElements(By.className("product-detail-image"));
-	}
+	
 
 	public WebElement latestProduct() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -99,7 +95,15 @@ public class MealPage extends BasicPage {
 	public WebElement getResetCuisineType() { 
 		return this.driver.findElement(By.className("link js-reset-cuisine")); 
 	}
-	public void addMeal() { 
+	public void addToChart(int quantity) {
+		WebElement qty = driver.findElement(By.xpath("//*[@id=\"body\"]/section[1]/div/div/div[2]/div/div[3]/div[1]/ul/li[3]/input"));
+		 String q= Integer.toString(quantity); 
+		 qty.sendKeys(q);
+		driver.findElement(By.xpath("//*[@id=\"body\"]/section[1]/div/div/div[2]/div/div[3]/div[2]/a")).click();
+
+		
+	}
+	public void addFavorite() {
 		this.driver.findElement(By.className("svg-icn")).click();
 	}
 
