@@ -26,11 +26,7 @@ public abstract class BasicTest {
 	protected String password="12345678a";
 	
 
-//	public BasicTest(WebDriver driver, WebDriverWait wait) {
-//		super();
-//		this.driver = driver;
-//		this.wait = wait;
-//	
+
 
 	@BeforeClass
 	public void beforeClass() {
@@ -54,7 +50,7 @@ public abstract class BasicTest {
 			String fileName = new SimpleDateFormat("yyyy-MM-dd-HH-mm'.png'").format(new Date());
 			File save = new File("screenshots/" + fileName);
 			FileHandler.copy(ss, save);
-			System.out.println("Sacuvan is saved");
+			System.out.println("Screenshot is saved");
 
 		}
 		this.driver.manage().deleteAllCookies();
