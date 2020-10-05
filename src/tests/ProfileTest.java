@@ -27,22 +27,24 @@ public class ProfileTest extends BasicTest {
 		lp.LogIn(this.email, this.password);
 		lp.getLoginBtn().click();
 		String msg = "Login Successfull";
-		Assert.assertEquals(lpp.getPopUp().getText(), msg, "[ERROR] login is not succeful!");
-		Thread.sleep(3000);
+		
+		Assert.assertTrue(lpp.getPopUp().getText().contains(msg),"[ERROR] login is not succeful!" );
+		Thread.sleep(5000);
+		
 		driver.navigate().to(baseUrl + "/member/profile");
-		lp.getEmail().clear();
-		lp.getPassword().clear();
-		lp.LogIn("tijana.paunica@gmail.com", this.password);
-		Thread.sleep(3000);
+		pp.changeProfile("Tijana", "Paunovic", "tijanap@gmail", "063437627", "thissipassword", "Dragise Cvetkovica 3", "Serbia", "Nis", "Naissus");
 
-		lp.getLoginBtn().click();
-		String smsg = "Setup Successful";
-		Assert.assertEquals(nsp.getMsg(), smsg, "[ERROR] setup failed");
-		Thread.sleep(3000);
+		pp.getSaveProfile().click();
+		String setUp = "Setup Successful";
+		Assert.assertTrue(nsp.AlertMsg().contains(setUp), "[ERROR] seting up new account failed!");
+		Thread.sleep(5000);
 
-		ap.getLogout();
-		String logout = "Logout Successfull!";
-		Assert.assertTrue(nsp.AlertMsg().contains(logout), "[ERROR] login failed!");
+		ap.logOut();
+		Thread.sleep(2000);
+		String logOut= "Logout Successfull!"; 
+		Assert.assertTrue(nsp.AlertMsg().contains(logOut), "[ERROR] logout failed!");
+
+		
 
 	}
 
@@ -52,11 +54,11 @@ public class ProfileTest extends BasicTest {
 		lpp.closePopUp();
 		lp.LogIn(this.email, this.password);
 		String login = "Login Successfull";
-		Assert.assertEquals(nsp.AlertMsg(), login, "[ERROR] login failed");
+		Assert.assertTrue(nsp.AlertMsg().contains(login), "[ERROR] login failed");
 		this.driver.navigate().to(baseUrl + "/member/profile");
 		String path = new File("/images/ja.jpg").getCanonicalPath();
 		pp.getUploadPhoto().sendKeys(path);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 
 		String uploadedImg = "Profile Image Uploaded Successfully";
 		Assert.assertTrue(nsp.AlertMsg().contains(uploadedImg), "[ERROR] image uoplaod failed");
