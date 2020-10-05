@@ -14,6 +14,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import pages.ChartSummeryPage;
 import pages.LocationPopupPage;
@@ -40,13 +41,14 @@ public class MealItemTest extends BasicTest {
 		mp.getResetCheef();
 		mp.getSearcMeal().sendKeys("GRILLED CUBAN CHICKEN BREAST");
 		mp.clickSrcMealBtn();
-		mp.addMeal();
+		mp.addToChart(5);
 		String msg = "The Following Errors Occurred:Please Select Location";
 		Assert.assertTrue(nsp.AlertMsg().contains(msg), "[ERROR] select location first !");
 		nsp.MessageDissapear();
 		String location = "City Center - Albany";
 		lpp.setLocation(location);
 		Thread.sleep(3000);
+		mp.addToChart(3);
 		String msgVerify = "Meal Added To Cart";
 		Assert.assertTrue(nsp.AlertMsg().contains(msgVerify), "[ERROR] meal not added to chart ");
 		Thread.sleep(3000);
@@ -60,38 +62,42 @@ public class MealItemTest extends BasicTest {
 		mp.getSearcMeal().sendKeys("MAHI WITH BEEF BOWL LEMONGRASS");
 		mp.clickSrcMealBtn();
 //		this is add to favorite, but make add to chart
-		mp.addMeal();
+		mp.addFavorite();
 		String msg = "Please login first!";
 		Assert.assertTrue(nsp.AlertMsg().contains(msg), "[ERROR], adding meal to favorite failed !");
 		lp.LogIn(this.email, this.password);
 		Thread.sleep(3000);
 		this.driver.navigate().to(baseUrl + "/meal/lobster-shrimp-chicken-quesadilla-combo");
-		mp.addMeal();
+		mp.addFavorite();
 		String mssg = "Product has been added to your favorites";
 		Assert.assertTrue(nsp.AlertMsg().contains(mssg), "[ERROR] , lobster adding to favorite failed ;)");
 
 	}
-	@Test(priority=10)
-	public void cleadChart() throws IOException, InterruptedException { 
-		this.driver.navigate().to(baseUrl+"/meals");
+
+	@Test(priority = 10)
+	public void cleadChart() throws IOException, InterruptedException {
+		this.driver.navigate().to(baseUrl + "/meals");
 		lpp.setLocation("City Center - Albany");
 		File file = new File("/data/Data.xlsx");
-		FileInputStream fis= new FileInputStream(file); 
+		FileInputStream fis = new FileInputStream(file);
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
-		XSSFSheet sheet = wb.getSheetAt(1); 
-		for (int i=1; i<sheet.getLastRowNum(); i++) {
-			XSSFRow row= sheet.getRow(i); 
-			XSSFCell cell = row.getCell(1); 
-			String mealUrl= cell.getStringCellValue(); 
+		XSSFSheet sheet = wb.getSheetAt(1);
+		for (int i = 1; i < sheet.getLastRowNum(); i++) {
+			XSSFRow row = sheet.getRow(i);
+			XSSFCell cell = row.getCell(1);
+			String mealUrl = cell.getStringCellValue();
 			this.driver.navigate().to(mealUrl);
 			Thread.sleep(3000);
-			WebElement qty=  this.driver.findElement(By.name("product_qty"));
-			qty.clear();
-//			parses string to int  
-			qty.sendKeys(arg0);
-		}
-		
-		
-	}
+			mp.addToChart(3);
+			SoftAssert sa = new SoftAssert();
+			String saved = "Meal Added To Cart";
+			sa.assertTrue(nsp.AlertMsg().contains(saved), "[ERROR] meal adding to chart failed!");
 
+		} 
+		csp.clearAll();
+		String removed= "All meals removed from Cart successfully"; 
+		Assert.assertTrue(nsp.AlertMsg().contains(removed), "[ERROR] chart not cleared!");
+
+
+	}
 }
