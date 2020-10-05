@@ -16,7 +16,7 @@ public class ChartSummeryPage extends BasicPage {
 		return this.driver.findElement(By.xpath("//*[@id=\"cartSummary\"]/div/div[1]/a[2]"));
 	}
 
-	public void cleatAll() {
+	public void clearAll() {
 		JavascriptExecutor js= (JavascriptExecutor) driver; 
 		js.executeScript("arguments[0].click(); ", this.getClearAllBtn()); 
 	}

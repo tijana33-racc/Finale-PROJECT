@@ -29,7 +29,7 @@ public class MealPage extends BasicPage {
 	}
 
 	public List<WebElement> foodImg() {
-		return this.driver.findElements(By.id("listing"));
+		return this.driver.findElements(By.className("product-detail-image"));
 	}
 
 	public WebElement latestProduct() {
@@ -102,6 +102,8 @@ public class MealPage extends BasicPage {
 	public void addMeal() { 
 		this.driver.findElement(By.className("svg-icn")).click();
 	}
+
+	}
 	
 
-}
+

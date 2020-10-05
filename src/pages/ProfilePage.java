@@ -6,11 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ProfilePage extends BasicPage {
+import tests.BasicTest;
 
+public class ProfilePage extends BasicPage {
 	public ProfilePage(WebDriver driver, WebDriverWait wait) {
 		super(driver, wait);
 	}
+	
+	
 
 	public WebElement getInputName() {
 		return this.driver.findElement(By.name("user_first_name"));
@@ -44,7 +47,7 @@ public class ProfilePage extends BasicPage {
 		return this.driver.findElement(By.id("user_country_id"));
 	}
 
-	public WebElement getCtate() {
+	public WebElement getState() {
 		return this.driver.findElement(By.id("user_state_id"));
 	}
 
@@ -88,5 +91,23 @@ public class ProfilePage extends BasicPage {
 		JavascriptExecutor js= (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click()", this.getRemovePhoto()); 
 	}
-	
+	public void changeProfile(String firstName, String lastName, String email, String phone, String password, String addres, String country, String city, String state) { 
+		this.getFirstName().sendKeys(firstName);
+		this.getLastName().sendKeys(lastName);
+		this.getEmail().sendKeys(email);
+		  LoginPage lp= new LoginPage(driver, wait); 
+		this.getCurrentPassword().sendKeys(lp.getPassword().getText()); 
+		this.getNewPassword().sendKeys(password);
+		this.getComnfirmPassword().sendKeys(password);
+		this.getState().sendKeys(state);
+		this.getPhoneNo().sendKeys(phone);
+		this.getAddres().sendKeys(addres);
+		this.getCountry().sendKeys(country);
+		this.getCity().sendKeys(city);
+		this.getSaveProfile().click();
+		this.getSaveNewPassword().click();
+		
+		
+		
+	}
 }

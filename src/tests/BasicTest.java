@@ -24,6 +24,13 @@ public abstract class BasicTest {
 	protected String baseUrl= "http://demo.yo-meals.com";
 	protected String email= "customer@dummyid.com";
 	protected String password="12345678a";
+	
+
+//	public BasicTest(WebDriver driver, WebDriverWait wait) {
+//		super();
+//		this.driver = driver;
+//		this.wait = wait;
+//	
 
 	@BeforeClass
 	public void beforeClass() {
