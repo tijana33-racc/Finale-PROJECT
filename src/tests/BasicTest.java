@@ -54,6 +54,8 @@ public abstract class BasicTest {
 
 		}
 		this.driver.manage().deleteAllCookies();
+		this.driver.navigate().refresh();
+		
 	}
 
 	@AfterClass
