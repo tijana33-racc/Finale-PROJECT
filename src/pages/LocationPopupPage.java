@@ -43,8 +43,12 @@ public class LocationPopupPage extends BasicPage{
     	js.executeScript("arguments[0].click()", this.getLocationInput());
 
     }
+    public WebElement getClose() {
+		return this.driver.findElement(By.xpath("//*[@id=\"location-popup\"]/div/div/div/div/a")); 
+    	
+    }
     public void closePopUp() {
-    	this.driver.findElement(By.className("close-btn close-btn-white")).click();
+    	this.getClose().click();
     }
     
 }
